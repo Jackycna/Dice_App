@@ -1,5 +1,4 @@
-import 'dart:nativewrappers/_internal/vm/lib/math_patch.dart';
-
+import 'dart:math';
 import 'package:dice_app/styles/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +12,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var leftDice = 1;
   var rightDice = 3;
-  var random;
+  final random = Random();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +25,11 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(20),
         child: GestureDetector(
           onTap: () {
-            random = Random(5);
+            var leftDice1 = random.nextInt(5) + 1;
+            var leftDice2 = random.nextInt(5) + 1;
             setState(() {
-              leftDice = random;
+              leftDice = leftDice1;
+              rightDice = leftDice2;
             });
           },
           child: Center(
@@ -46,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                       width: 100,
 
                       child: Image.asset(
-                        'assets/images/${random}-removebg-preview.png',
+                        'assets/images/${leftDice}-removebg-preview.png',
                       ),
                     ),
                   ),
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                       width: 100,
 
                       child: Image.asset(
-                        'assets/images/${random}-removebg-preview.png',
+                        'assets/images/${rightDice}-removebg-preview.png',
                       ),
                     ),
                   ),
